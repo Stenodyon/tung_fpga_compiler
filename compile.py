@@ -10,12 +10,14 @@ grammar = r'''start: module* (construction ("," construction)*)?
 
         module: "module" NAME "{" stmt* "}"
 
-        ?stmt: passthrough | function | sync_function
+        ?stmt: passthrough | function | sync_function | pin_def
 
         passthrough: lane "<->" lane ";"
 
         function: eq "->" lane ";"
         sync_function: eq "sync" "->" lane ";"
+
+        pin_def: NAME "=" lane ";"
 
         eq: anding "~=" eq | anding
         anding: oring "&" anding | oring
@@ -293,6 +295,9 @@ class Parser(Transformer):
             else:
                 funcs.append(item)
         return Module(name, funcs, switches)
+
+    def pin_def(self, items):
+        raise NotImplementedError("Pin naming is not implemented yet, sorry!")
 
     def start(self, items):
         modules = []
