@@ -1,6 +1,8 @@
 # FPGA Compiler
 A compiler for my basic FPGA system in TUNG
 
+This project is very heavily inspired from [this article](http://blog.notdot.net/2012/10/Build-your-own-FPGA)
+
 ## How to use
 
 This program uses the [Lark library](https://github.com/erezsh/lark) which you can install with
